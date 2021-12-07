@@ -1,4 +1,4 @@
-function createElemWithText(element="p", textContent="", className)
+function createElemWithText(element="p", textContent="", className) //done
 {
     const newElement = document.createElement(element);
     const text = document.createTextNode(textContent);
@@ -11,7 +11,13 @@ function createElemWithText(element="p", textContent="", className)
 }
 function createSelectOptions(data)
 {
-
+    if (!data) return;
+    let arr = [data.length];
+    for (let i = 0; i<data.length; i++)
+    {
+        arr[i] = document.createElement(option);
+    }
+    return arr;
 }
 function toggleCommentSection(postID)
 {
