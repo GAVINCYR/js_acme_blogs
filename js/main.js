@@ -1,20 +1,27 @@
-function createElemWithText()
+function createElemWithText(element="p", textContent="", className)
+{
+    const newElement = document.createElement(element);
+    const text = document.createTextNode(textContent);
+    newElement.appendChild(text);
+    if(className)
+    {
+        newElement.setAttribute('class', className);
+    }
+    return newElement;
+}
+function createSelectOptions(data)
 {
 
 }
-function createSelectOptions()
+function toggleCommentSection(postID)
 {
 
 }
-function toggleCommentSection()
+function toggleCommentButton(postID)
 {
 
 }
-function toggleCommentButton()
-{
-
-}
-function deleteChildElements()
+function deleteChildElements(parent)
 {
 
 }
@@ -26,11 +33,11 @@ function removeButtonListeners()
 {
 
 }
-function createComments()
+function createComments(data)
 {
 
 }
-function populateSelectMenu()
+function populateSelectMenu(data)
 {
 
 }
@@ -38,43 +45,43 @@ function getUsers()
 {
 
 }
-function getUserPosts()
+function getUserPosts(userID)
 {
 
 }
-function getUser()
+function getUser(userID)
 {
 
 }
-function getPostComments()
+function getPostComments(postID)
 {
 
 }
-function displayComments()
+async function displayComments(postID)
 {
 
 }
-function createPosts()
+async function createPosts(data)
 {
 
 }
-function displayPosts()
+async function displayPosts(data)
 {
 
 }
-function toggleComments()
+function toggleComments(event, postID)
 {
 
 }
-function refreshPosts()
+async function refreshPosts(data)
 {
 
 }
-function selectMenuChangeEventHandler()
+async function selectMenuChangeEventHandler(event)
 {
 
 }
-function initPage()
+async function initPage()
 {
 
 }
