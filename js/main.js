@@ -242,3 +242,4 @@ function initApp()
     let select = document.getElementById("selectMenu");
     select.addEventListener("change", selectMenuChangeEventHandler, false);
 }
+document.addEventListener("DOMContentLoaded", initApp, false);
