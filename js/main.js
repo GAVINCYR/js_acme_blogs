@@ -24,16 +24,14 @@ function createSelectOptions(data) //done
 function toggleCommentSection(postID)
 {
     if (!postID) return undefined;
-    let section = document.querySelectorAll(`section[data-post-id="${postID}"]`);
-    if (section)
-    {
-       section.classList.toggle("hide"); 
-       return section;
-    }
-    else
-    {
-        return null;
-    }
+    let section = null;
+    document.querySelectorAll(`[data-post-id="${postID}"]`).forEach((elem) => {
+        if (elem.tagName.toLowerCase() === 'section') {
+            elem.classList.toggle("hide");
+            section = elem;
+        }
+    })
+    return section;
 }
 function toggleCommentButton(postID)
 {
@@ -242,4 +240,4 @@ function initApp()
     let select = document.getElementById("selectMenu");
     select.addEventListener("change", selectMenuChangeEventHandler, false);
 }
-document.addEventListener("DOMContentLoaded", initApp, false);
+document.addEventListener("DOMContentLoaded", initApp());
