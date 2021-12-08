@@ -12,14 +12,13 @@ function createElemWithText(element="p", textContent="", className) //done
 function createSelectOptions(data)
 {
     if (!data) return;
-    let options = [];
-    data.forEach(user)
-    {
-        let opt = document.createElement('option');
+    const options = [];
+    data.forEach((user) => {
+        const opt = document.createElement("option");
         opt.value = user.id;
         opt.textContent = user.name;
         options.push(opt);
-    }
+    });
     return options;
 }
 function toggleCommentSection(postID)
