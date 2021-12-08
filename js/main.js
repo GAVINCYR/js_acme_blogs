@@ -12,12 +12,17 @@ function createElemWithText(element="p", textContent="", className) //done
 function createSelectOptions(data)
 {
     if (!data) return;
-    let arr = [data.length];
+    let select = document.getElementById("selectNumber");
+    let arr = [data.length-1];
     for (let i = 0; i<data.length; i++)
     {
-        arr[i] = document.createElement(option);
+        let opt = arr[i];
+        let el = document.createElement("option");
+        el.textContent = opt;
+        el.value = opt;
+        select.appendChild(el);
     }
-    return arr;
+    return select;
 }
 function toggleCommentSection(postID)
 {
