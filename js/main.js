@@ -9,7 +9,7 @@ function createElemWithText(element="p", textContent="", className) //done
     }
     return newElement;
 }
-function createSelectOptions(data)
+function createSelectOptions(data) //done
 {
     if (!data) return;
     const options = [];
@@ -23,11 +23,20 @@ function createSelectOptions(data)
 }
 function toggleCommentSection(postID)
 {
-
+    let section = document.querySelectorAll('[data-post-id]');
+    let section1 = section.querySelector(postID);
+    if (!section1) return;
+    section1.classList.toggle("hide");
+    return section1;
 }
 function toggleCommentButton(postID)
 {
-
+    let section = document.querySelectorAll('[data-post-id]');
+    let section1 = section.querySelector(postID);
+    section1.textContent =
+        section1.textContent === "Show Comments"
+            ? "Hide Comments"
+            : "Show Comments";
 }
 function deleteChildElements(parent)
 {
