@@ -23,27 +23,38 @@ function createSelectOptions(data) //done
 }
 function toggleCommentSection(postID)
 {
-    if (!postID) return;
-    let section = document.querySelectorAll('[data-post-id]');
-    let section1 = section.querySelector(postID);
-    if (!section1) return null;
-    section1.classList.toggle("hide");
-    return section1;
+    if (!postID) return undefined;
+    let section = document.querySelectorAll(`section[data-post-id="${postID}"]`);
+    if (section)
+    {
+       section.classList.toggle("hide"); 
+       return section;
+    }
+    else
+    {
+        return null;
+    }
 }
 function toggleCommentButton(postID)
 {
-    if (!postID) return;
-    let section = document.querySelectorAll('[data-post-id]');
-    let section1 = section.querySelector(postID);
-    if (!section1) return null;
-    section1.textContent =
-        section1.textContent === "Show Comments"
-            ? "Hide Comments"
+    if (!postID) return undefined;
+    let button = document.querySelectorAll(`button[data-post-id="${postID}"]`);
+    if (button)
+    {
+        button.textContent =
+            button.textContent === "Show Comments"
+            ? "Hide Commments"
             : "Show Comments";
+        return button;
+    }
+    else
+    {
+        return null;
+    }
 }
 function deleteChildElements(parent)
 {
-    if (!parent) return;
+    if (!parent) return undefined;
 }
 function addButtonListeners()
 {
@@ -55,7 +66,7 @@ function removeButtonListeners()
 }
 function createComments(data)
 {
-    
+
 }
 function populateSelectMenu(data)
 {
@@ -99,7 +110,10 @@ async function refreshPosts(data)
 }
 async function selectMenuChangeEventHandler(event)
 {
-
+    let id = event?.target?.value || 1;
+    let get = await getUserPosts(id);
+    let refresh = await refreshPosts(get);
+    return[id, get, refresh];
 }
 async function initPage()
 {
