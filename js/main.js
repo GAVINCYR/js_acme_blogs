@@ -13,9 +13,12 @@ function createSelectOptions(data)
 {
     if (!data) return;
     let options = [];
-    data.forEach((user))
+    data.forEach(user)
     {
-        options.push(user);
+        let opt = document.createElement('option');
+        opt.value = user.id;
+        opt.textContent = user.name;
+        options.push(opt);
     }
     return options;
 }
