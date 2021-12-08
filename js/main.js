@@ -54,11 +54,29 @@ function toggleCommentButton(postID)
 }
 function deleteChildElements(parent)
 {
-    if (!parent) return undefined;
+    if (!parent.tagName) return undefined;
+    let child = parent.lastElementChild;
+    while (child)
+    {
+        parent.removeChild(childVar);
+        child = parent.lastElementChild;
+    }
+    return parent;
 }
 function addButtonListeners()
 {
-
+    let button = document.querySelectorAll("main button");
+    if (button)
+    {
+        for (let i of button)
+        {
+            const postID = i.dataset.postID;
+            i.addEventListener("click", function (event){
+                toggleComments(event, postID);
+            });
+        }
+    }
+    return button;
 }
 function removeButtonListeners()
 {
