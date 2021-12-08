@@ -36,19 +36,14 @@ function toggleCommentSection(postID)
 function toggleCommentButton(postID)
 {
     if (!postID) return undefined;
-    let button = document.querySelectorAll(`button[data-post-id="${postID}"]`);
-    if (button)
-    {
-        button.textContent =
-            button.textContent === "Show Comments"
-            ? "Hide Commments"
-            : "Show Comments";
-        return button;
-    }
-    else
-    {
-        return null;
-    }
+    let button = null;
+    document.querySelectorAll(`[data-post-id='${postID}']`).forEach((elem) => {
+        if(elem.tagName.toLowerCase() === 'button') {
+            elem.textContent = elem.textContent === 'Show Comments'?'Hide Comments':'Show Comments';
+            button = elem;
+        }
+    });
+    return button;
 }
 function deleteChildElements(parent)
 {
@@ -114,9 +109,16 @@ function populateSelectMenu(data)
 }
 async function getUsers()
 {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    const data = await response.json();
-    return data;
+    try
+    {
+        const response = await fetch("https://jsonplaceholder.typicode.com/users");
+        const data = await response.json();
+        return data;
+    }
+    catch(err)
+    {
+        console.error(err);
+    }
 }
 async function getUserPosts(userID)
 {
