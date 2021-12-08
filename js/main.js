@@ -116,39 +116,112 @@ function populateSelectMenu(data)
 }
 async function getUsers()
 {
-    
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const data = await response.json();
+    return data;
 }
-function getUserPosts(userID)
+async function getUserPosts(userID)
 {
-
+    if (!userID) return undefined;
+    try
+    {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts?userId=${userID}`);
+        return await response.json();
+    }
+    catch (err)
+    {
+        console.error(err);
+    }
 }
-function getUser(userID)
+async function getUser(userID)
 {
-
+    if (!userID) return undefined;
+    try
+    {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/users/${userID}`);
+        return await response.json();
+    }
+    catch (err)
+    {
+        console.error(err);
+    }
 }
-function getPostComments(postID)
+async function getPostComments(postID)
 {
-
+    if (!userID) return undefined;
+    try
+    {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${userID}`);
+        return await response.json();
+    }
+    catch (err)
+    {
+        console.error(err);
+    }
 }
 async function displayComments(postID)
 {
-
+    if (!postID) return undefined;
+    let section = document.createElement("section");
+    section.dataset.postId = postID;
+    section.classList.add("comments", "hide");
+    let comments = await getPostComments(postID);
+    let fragment = createComments(comments);
+    section.append(fragment);
+    return section;
 }
 async function createPosts(data)
 {
-
+    if (!data) return undefined;
+    let fragment = document.createDocumentFragment();
+    for (let post of data){
+        let article = document.createElement("article");
+        let header = createElemWithText("h2", post.title);
+        let p1 = createElemWithText("p", post.body);
+        let p2 = createElemWithText("p", `Post ID: ${post.id}`);
+        let author = await getUser(post.userId);
+        let p3 = createElemWithText("p", `Author: ${author.name} with ${author.company.name}`);
+        let p4 = createElemWithText("p", author.company.catchPhrase);
+        let button = createElemWithText("button", "Show Comments");
+        button.dataset.postId = post.id;
+        article.append(header, p1, p2, p3, p4, button);
+        let section = await displayComments(post.id);
+        article.append(section);
+        fragment.append(article);
+    }
+    return fragment;
 }
 async function displayPosts(data)
 {
-
+    const main = document.querySelector("main");
+    if(data)
+    {
+        let elm = await createPosts(data);
+        main.append(elm);
+        return elm;
+    }
+    else
+    {
+        let p = createElemWithText("p", "Select an Employee to display their posts.", "default-text");
+        return p;
+    }
 }
 function toggleComments(event, postID)
 {
-
+    if (!event || !postID) return undefined;
+    event.target.listener = true;
+    let section = toggleCommentSection(postID);
+    let button = toggleCommentButton(postID);
+    return [section, button];
 }
 async function refreshPosts(data)
 {
-
+    if (!data) return undefined;
+    let buttons = removeButtonListeners();
+    let main = deleteChildElements(document.querySelector("main"));
+    let fragment = await displayPosts(data);
+    let button = addButtonListeners();
+    return [buttons, main, fragment, button];
 }
 async function selectMenuChangeEventHandler(event)
 {
@@ -159,9 +232,13 @@ async function selectMenuChangeEventHandler(event)
 }
 async function initPage()
 {
-
+    let users = await getUsers();
+    let select = populateSelectMenu(users);
+    return [users, select];
 }
 function initApp()
 {
-
+    initPage();
+    let select = document.getElementById("selectMenu");
+    select.addEventListener("change", selectMenuChangeEventHandler, false);
 }
