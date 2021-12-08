@@ -80,19 +80,43 @@ function addButtonListeners()
 }
 function removeButtonListeners()
 {
-
+    const main = document.querySelector("main");
+    const buttons = main.querySelectorAll("button");
+    for(let i of buttons){
+        const postId = i.dataset.postId;
+        i.removeEventListener("click", function(e){toggleComments(e, postId)},
+        false);
+    }
+    return buttons;
 }
 function createComments(data)
 {
-
+    if (!data) return undefined;
+    let fragment = document.createDocumentFragment();
+    for (let comment of data){
+        let article = document.createElement("article");
+        let header = createElemWithText('h3', comment.name);
+        let p1 = createElemWithText('p', comment.body);
+        let p2 = createElemWithText('p', `From: ${comment.email}`);
+        article.append(header, p1, p2);
+        fragment.append(article);
+    }
+    return fragment;
 }
 function populateSelectMenu(data)
 {
-
+    if(!data) return undefined;
+    let menu = document.getElementById("selectMenu");
+    let options = createSelectOptions(users);
+    for (let i of options)
+    {
+        menu.append(i);
+    }
+    return menu;
 }
-function getUsers()
+async function getUsers()
 {
-
+    
 }
 function getUserPosts(userID)
 {
