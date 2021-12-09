@@ -98,8 +98,8 @@ function createComments(data)
 function populateSelectMenu(data)
 {
     if(!data) return undefined;
-    let menu = document.getElementById("selectMenu");
-    let options = createSelectOptions(users);
+    let menu = document.getElementById(`#selectMenu`);
+    let options = createSelectOptions(data);
     for (let i of options)
     {
         menu.append(i);
@@ -239,6 +239,8 @@ function initApp()
 {
     initPage();
     let select = document.getElementById("selectMenu");
-    select.addEventListener("change", selectMenuChangeEventHandler, false);
+    select.addEventListener("click", (e) => {
+        selectMenuChangeEventHandler(e);
+    });
 }
 document.addEventListener("DOMContentLoaded", initApp());
