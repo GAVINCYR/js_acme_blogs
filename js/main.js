@@ -227,7 +227,9 @@ async function selectMenuChangeEventHandler(event)
     let id = event?.target?.value || 1;
     let get = await getUserPosts(id);
     let refresh = await refreshPosts(get);
-    return[id, get, refresh];
+    const arr = [];
+    arr.push(id, posts, result);
+    return arr;
 }
 async function initPage()
 {
