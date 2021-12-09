@@ -98,12 +98,11 @@ function createComments(data)
 function populateSelectMenu(data)
 {
     if(!data) return undefined;
-    let menu = document.getElementById(`#selectMenu`);
-    let options = createSelectOptions(data);
-    for (let i of options)
-    {
-        menu.append(i);
-    }
+    const menu = document.getElementById("selectMenu");
+    const options = createSelectOptions(data);
+    options.forEach((option) => {
+        menu.append(option);
+    });
     return menu;
 }
 async function getUsers()
