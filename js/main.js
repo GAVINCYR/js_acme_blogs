@@ -59,18 +59,16 @@ function deleteChildElements(parent)
 }
 function addButtonListeners()
 {
-    let button = document.querySelectorAll("main button");
-    if (button)
+    let main = document.querySelector("main");
+    let buttons = main.querySelectorAll("button");
+    if(buttons)
     {
-        for (let i of button)
-        {
-            const postID = i.dataset.postID;
-            i.addEventListener("click", function (event){
-                toggleComments(event, postID);
-            });
-        }
+        buttons.forEach((button) => {
+            const postID = button.dataset.postId;
+            button.addEventListener("click", function(e) {toggleComments(e, postID)}, false);
+        });
     }
-    return button;
+    return buttons;
 }
 function removeButtonListeners()
 {
