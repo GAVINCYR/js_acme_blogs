@@ -149,7 +149,11 @@ async function getPostComments(postID)
     if (!userID) return undefined;
     try
     {
-        const response = await fetch(`https://jsonplaceholder.typicode.com/comments?postId=${userID}`);
+        const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${userID}/comments`);
+        if(!response.ok)
+        {
+            throw new Error("getPostsComments error");
+        }
         return await response.json();
     }
     catch (err)
