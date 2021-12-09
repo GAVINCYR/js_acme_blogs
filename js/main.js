@@ -228,8 +228,8 @@ async function refreshPosts(data)
 async function selectMenuChangeEventHandler(event)
 {
     let id = event?.target?.value || 1;
-    let get = await getUserPosts(id);
-    let refresh = await refreshPosts(get);
+    let posts = await getUserPosts(id);
+    let refresh = await refreshPosts(posts);
     const arr = [];
     arr.push(id, posts, result);
     return arr;
