@@ -4,8 +4,6 @@
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://romantic-blackwell-dde968.netlify.app/)
 
-[Netlify](https://romantic-blackwell-dde968.netlify.app/)
-
 **Start by clicking the Remix on Glitch button above.**
 
 _Once you are working with your own copy of the project on Glitch..._
